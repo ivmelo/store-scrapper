@@ -1,0 +1,14 @@
+{
+    "name": "ivanilson/app-store-crawler",
+    "description": "A PHP crawler for Google Play and the App Store.",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Ivanilson Melo",
+            "email": "meloivanilson@gmail.com"
+        }
+    ],
+    "require": {
+        "fabpot/goutte": "^3.2"
+    }
+}
