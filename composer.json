@@ -1,6 +1,6 @@
 {
     "name": "ivanilson/app-store-crawler",
-    "description": "A PHP crawler for Google Play and the App Store.",
+    "description": "A PHP crawler for Google Play Store and the App Store.",
     "type": "library",
     "authors": [
         {
