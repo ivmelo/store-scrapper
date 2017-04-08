@@ -19,6 +19,8 @@ array_push($app_store_urls, 'https://itunes.apple.com/us/app/my-talking-tom/id65
 $scraper = new Scraper();
 // print_r($appstore->getAppStoreAppData($app_store_urls[0]));
 // print_r($appstore->getPlayStoreAppData($play_store_urls[0]));
-// print_r($scraper->getAppStoreTopFree());
 
-print_r($scraper->getAppStoreTopPaid());
+// print_r($scraper->getAppStoreTopFree());
+// print_r($scraper->getAppStoreTopPaid());
+
+print_r($scraper->getPlayStoreTopFree());
