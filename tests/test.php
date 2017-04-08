@@ -23,4 +23,5 @@ $scraper = new Scraper();
 // print_r($scraper->getAppStoreTopFree());
 // print_r($scraper->getAppStoreTopPaid());
 
-print_r($scraper->getPlayStoreTopFree());
+// print_r($scraper->getPlayStoreTopFree());
+print_r($scraper->getPlayStoreTopPaid());

@@ -106,6 +106,32 @@ class Scraper
     }
 
     /**
+     * Get the top 60 paid apps from Google Play Store.
+     *
+     * @return Array $top_apps
+     */
+    public function getPlayStoreTopPaid()
+    {
+        $top_apps = [];
+
+        $crawler = $this->client->request('GET', 'https://play.google.com/store/apps/collection/topselling_paid?hl=en');
+
+        $top_apps = $crawler->filter('.card.small.square-cover')->each(function($node){
+            $app_data = [];
+
+            $app_data['position'] = intval($node->filter('.title')->text());
+            $app_data['name'] = $node->filter('.title')->text();
+            $app_data['category'] = $node->filter('.subtitle')->text();
+            $app_data['app_icon']  = 'https:' . $node->filter('.cover-image')->attr('data-cover-large');
+            $app_data['url'] = 'https://play.google.com' . $node->filter('.card-click-target')->attr('href');
+
+            return $app_data;
+        });
+
+        return $top_apps;
+    }
+
+    /**
      * Gets app data from the App Store.
      *
      * @var String $app_url
