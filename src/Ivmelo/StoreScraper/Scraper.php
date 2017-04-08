@@ -176,9 +176,9 @@ class Scraper
      * @var String $app_url
      * @return Array $app
      */
-    public function getPlayStoreAppData($app_url)
+    public function getPlayStoreAppData($app_url, $store = 'us')
     {
-        $crawler = $this->client->request('GET', $app_url);
+        $crawler = $this->client->request('GET', $app_url . '&hl=en&gl=' . $store);
 
         $app = [];
 

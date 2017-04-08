@@ -9,8 +9,8 @@ use Ivmelo\StoreScraper\Scraper;
 date_default_timezone_set('America/Fortaleza');
 
 $play_store_urls = [];
-array_push($play_store_urls, 'https://play.google.com/store/apps/details?id=com.ultimateguitar.tabs&hl=en');
-array_push($play_store_urls, 'https://play.google.com/store/apps/details?id=com.outfit7.mytalkingtomfree&hl=en');
+array_push($play_store_urls, 'https://play.google.com/store/apps/details?id=com.ultimateguitar.tabs');
+array_push($play_store_urls, 'https://play.google.com/store/apps/details?id=com.outfit7.mytalkingtomfree');
 
 $app_store_urls = [];
 array_push($app_store_urls, 'https://itunes.apple.com/us/app/tabs-chords-by-ultimate-guitar-learn-and-play/id357828853?mt=8');
@@ -24,4 +24,6 @@ $scraper = new Scraper();
 // print_r($scraper->getAppStoreTopPaid());
 
 // print_r($scraper->getPlayStoreTopFree());
-print_r($scraper->getPlayStoreTopPaid());
+print_r($scraper->getPlayStoreAppData($scraper->getPlayStoreTopPaid()[0]['url']));
+
+// print_r($appstore->getAppStoreAppData($app_store_urls[0]));
