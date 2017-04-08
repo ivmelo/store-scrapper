@@ -24,6 +24,15 @@ $scraper = new Scraper();
 // print_r($scraper->getAppStoreTopPaid());
 
 // print_r($scraper->getPlayStoreTopFree());
-print_r($scraper->getPlayStoreAppData($scraper->getPlayStoreTopPaid()[0]['url']));
+// print_r($scraper->getPlayStoreAppData($scraper->getPlayStoreTopPaid()[0]['url']));
+
+// var_dump($scraper->getAppStoreTopFree());
+//
+// var_dump($scraper->getAppStoreAppData($scraper->getAppStoreTopFree()[30]['url']));
+
+var_dump($scraper->getPlayStoreTopPaid());
+
+var_dump($scraper->getPlayStoreAppData('https://play.google.com/store/apps/details?id=com.explodingkittens.projectbombsquad'));
+
 
 // print_r($appstore->getAppStoreAppData($app_store_urls[0]));

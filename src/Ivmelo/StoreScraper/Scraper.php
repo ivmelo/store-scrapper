@@ -146,7 +146,8 @@ class Scraper
         $app['name'] = $crawler->filter('[itemprop=name]')->text();
         $app['developer'] = $crawler->filter('[itemprop=author]')->text();
         $app['icon_url'] = $crawler->filter('.artwork > meta')->attr('content');
-        $app['description'] = substr($crawler->filter('[itemprop=description]')->text(), 0, 100);
+        $app['description'] = $crawler->filter('[itemprop=description]')->text();
+        $app['description_html'] = $crawler->filter('[itemprop=description]')->html();
         $app['price'] = $crawler->filter('.price')->text();
         $app['category'] = $crawler->filter('[itemprop=applicationCategory]')->text();
 
@@ -158,8 +159,13 @@ class Scraper
         $app['copyright'] = $crawler->filter('.copyright')->text();
 
         $app['rating'] = doubleval($crawler->filter('[itemprop=ratingValue]')->text());
-        $app['rating_count'] = intval($crawler->filter('.rating .rating-count')->eq(1)->text());
 
+        // Fallback in case this is the first version of the app...
+        try {
+            $app['rating_count'] = intval($crawler->filter('.rating .rating-count')->eq(1)->text());
+        } catch (\Exception $e) {
+            $app['rating_count'] = intval($crawler->filter('.rating .rating-count')->eq(0)->text());
+        }
 
         $screens = $crawler->filter('[itemprop=screenshot]')->each(function($node) use (&$app) {
             return$node->attr('src');
@@ -185,7 +191,8 @@ class Scraper
         $app['name'] = $crawler->filter('.id-app-title')->text();
         $app['developer'] = $crawler->filter('[itemprop=author] [itemprop=name]')->text();
         $app['icon_url'] = $crawler->filter('.cover-image')->attr('src');
-        $app['description'] = substr($crawler->filter('[itemprop=description] > div')->text(), 0, 100);
+        $app['description'] = $crawler->filter('[itemprop=description] > div')->text();
+        $app['description_html'] = $crawler->filter('[itemprop=description] > div')->html();
         $app['price'] = trim($crawler->filter('.price')->text()) == 'Install' ? 'Free' : substr(trim($crawler->filter('.price')->text()), 0, -4);
         $app['category'] = $crawler->filter('[itemprop=genre]')->text();
 
