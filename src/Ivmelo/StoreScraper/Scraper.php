@@ -28,6 +28,58 @@ class Scraper
     }
 
     /**
+     * Get the top 100 free apps from the App Store.
+     *
+     * @return Array $top_apps
+     */
+    public function getAppStoreTopFree()
+    {
+        $top_apps = [];
+
+        $crawler = $this->client->request('GET', 'http://www.apple.com/itunes/charts/free-apps/');
+
+        $top_apps = $crawler->filter('.section-content li')->each(function($node){
+            $app_data = [];
+
+            $app_data['position'] = intval($node->filter('strong')->text());
+            $app_data['name'] = $node->filter('h3')->text();
+            $app_data['category'] = $node->filter('h4')->text();
+            $app_data['app_icon']  = 'https://www.apple.com' . $node->filter('a > img')->attr('src');
+            $app_data['url'] = $node->filter('a')->attr('href');
+
+            return $app_data;
+        });
+
+        return $top_apps;
+    }
+
+    /**
+     * Get the top 100 paid apps from the App Store.
+     *
+     * @return Array $top_apps
+     */
+    public function getAppStoreTopPaid()
+    {
+        $top_apps = [];
+
+        $crawler = $this->client->request('GET', 'http://www.apple.com/itunes/charts/paid-apps/');
+
+        $top_apps = $crawler->filter('.section-content li')->each(function($node){
+            $app_data = [];
+
+            $app_data['position'] = intval($node->filter('strong')->text());
+            $app_data['name'] = $node->filter('h3')->text();
+            $app_data['category'] = $node->filter('h4')->text();
+            $app_data['app_icon']  = 'https://www.apple.com' . $node->filter('a > img')->attr('src');
+            $app_data['url'] = $node->filter('a')->attr('href');
+
+            return $app_data;
+        });
+
+        return $top_apps;
+    }
+
+    /**
      * Gets app data from the App Store.
      *
      * @var String $app_url
