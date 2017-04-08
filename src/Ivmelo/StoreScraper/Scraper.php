@@ -84,11 +84,11 @@ class Scraper
      *
      * @return Array $top_apps
      */
-    public function getPlayStoreTopFree()
+    public function getPlayStoreTopFree($store = 'us')
     {
         $top_apps = [];
 
-        $crawler = $this->client->request('GET', 'https://play.google.com/store/apps/collection/topselling_free?hl=en');
+        $crawler = $this->client->request('GET', 'https://play.google.com/store/apps/collection/topselling_free?hl=en&num=100&gl=' . $store);
 
         $top_apps = $crawler->filter('.card.small.square-cover')->each(function($node){
             $app_data = [];
@@ -110,11 +110,11 @@ class Scraper
      *
      * @return Array $top_apps
      */
-    public function getPlayStoreTopPaid()
+    public function getPlayStoreTopPaid($store = 'us')
     {
         $top_apps = [];
 
-        $crawler = $this->client->request('GET', 'https://play.google.com/store/apps/collection/topselling_paid?hl=en');
+        $crawler = $this->client->request('GET', 'https://play.google.com/store/apps/collection/topselling_paid?hl=en&num=100&gl=' . $store);
 
         $top_apps = $crawler->filter('.card.small.square-cover')->each(function($node){
             $app_data = [];
