@@ -1,6 +1,6 @@
 {
-    "name": "ivanilson/app-store-crawler",
-    "description": "A PHP crawler for Google Play Store and the App Store.",
+    "name": "ivanilson/store-crawler",
+    "description": "A PHP scraper for Google Play Store and Apple App Store.",
     "type": "library",
     "authors": [
         {
@@ -10,7 +10,7 @@
     ],
     "autoload": {
         "psr-0": {
-            "Ivmelo\\AppStoreScrapper": "src/"
+            "Ivmelo\\StoreScraper": "src/"
         }
     },
     "require": {

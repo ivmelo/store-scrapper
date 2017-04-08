@@ -1,6 +1,6 @@
 <?php
 
-namespace Ivmelo\AppStoreScrapper;
+namespace Ivmelo\StoreScraper;
 
 use Goutte\Client;
 use Symfony\Component\DomCrawler\Crawler;
@@ -9,7 +9,7 @@ use Symfony\Component\DomCrawler\Crawler;
  * Scraps app data from the App Store and Google Play Store.
  * @author Ivanilson Melo
  */
-class AppStoreScrapper
+class Scraper
 {
 
     /**
