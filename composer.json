@@ -1,5 +1,5 @@
 {
-    "name": "ivanilson/store-scraper",
+    "name": "ivmelo/store-scraper",
     "description": "A PHP scraper for Google Play Store and Apple App Store.",
     "type": "library",
     "authors": [
