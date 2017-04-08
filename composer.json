@@ -8,6 +8,11 @@
             "email": "meloivanilson@gmail.com"
         }
     ],
+    "autoload": {
+        "psr-0": {
+            "Ivmelo\\AppStoreScrapper": "src/"
+        }
+    },
     "require": {
         "fabpot/goutte": "^3.2"
     }

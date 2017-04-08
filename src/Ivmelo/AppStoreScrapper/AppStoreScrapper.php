@@ -1,22 +1,9 @@
 <?php
 
-require 'vendor/autoload.php';
-
-date_default_timezone_set('America/Fortaleza');
+namespace Ivmelo\AppStoreScrapper;
 
 use Goutte\Client;
-
-
-$urls = [];
-array_push($urls, 'https://itunes.apple.com/us/app/tabs-chords-by-ultimate-guitar-learn-and-play/id357828853?mt=8');
-array_push($urls, 'https://itunes.apple.com/us/app/my-talking-tom/id657500465?mt=8');
-
-// Go to the symfony.com website
-
-// $app = [];
-
-
-
+use Symfony\Component\DomCrawler\Crawler;
 
 /**
  * Scraps app data from the App Store and Google Play Store.
@@ -79,6 +66,3 @@ class AppStoreScrapper
         return $app;
     }
 }
-
-$appstore = new AppStoreScrapper();
-print_r($appstore->getAppData($urls[0]));
