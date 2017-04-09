@@ -30,9 +30,10 @@ $scraper = new Scraper();
 //
 // var_dump($scraper->getAppStoreAppData($scraper->getAppStoreTopFree()[30]['url']));
 
-var_dump($scraper->getPlayStoreTopPaid());
+// var_dump($scraper->getPlayStoreTopPaid());
 
-var_dump($scraper->getPlayStoreAppData('https://play.google.com/store/apps/details?id=com.explodingkittens.projectbombsquad'));
+// var_dump($scraper->getPlayStoreAppData('https://play.google.com/store/apps/details?id=com.explodingkittens.projectbombsquad'));
 
+var_dump($scraper->getAppStoreAppData('https://itunes.apple.com/us/app/cifra-club/id921625944?mt=8'));
 
 // print_r($appstore->getAppStoreAppData($app_store_urls[0]));

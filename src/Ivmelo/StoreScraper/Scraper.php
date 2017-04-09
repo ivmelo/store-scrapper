@@ -158,7 +158,12 @@ class Scraper
         $app['languages'] = explode(', ', substr($crawler->filter('.language')->text(), 11));
         $app['copyright'] = $crawler->filter('.copyright')->text();
 
-        $app['rating'] = doubleval($crawler->filter('[itemprop=ratingValue]')->text());
+        // Fallback in case there are no reviews for the specified version...
+        try {
+            $app['rating'] = doubleval($crawler->filter('[itemprop=ratingValue]')->text());
+        } catch (\Exception $e) {
+            $app['rating'] = doubleval($crawler->filter('.rating')->attr('aria-label'));
+        }
 
         // Fallback in case this is the first version of the app...
         try {
