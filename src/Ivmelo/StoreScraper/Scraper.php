@@ -155,21 +155,30 @@ class Scraper
         $app['last_update'] = $date->format('Y-m-d');
 
         $app['version'] = $crawler->filter('[itemprop=softwareVersion]')->text();
-        $app['languages'] = explode(', ', substr($crawler->filter('.language')->text(), 11));
+        $app['languages'] = explode(', ', substr($crawler->filter('.language')->text(), strpos($crawler->filter('.language')->text(), ': ') + 2));
         $app['copyright'] = $crawler->filter('.copyright')->text();
 
         // Fallback in case there are no reviews for the specified version...
         try {
             $app['rating'] = doubleval($crawler->filter('[itemprop=ratingValue]')->text());
         } catch (\Exception $e) {
-            $app['rating'] = doubleval($crawler->filter('.rating')->attr('aria-label'));
+            try {
+                $app['rating'] = doubleval($crawler->filter('.rating')->attr('aria-label'));
+            } catch (\Exception $e) {
+                $app['rating'] = null;
+            }
+
         }
 
         // Fallback in case this is the first version of the app...
         try {
             $app['rating_count'] = intval($crawler->filter('.rating .rating-count')->eq(1)->text());
         } catch (\Exception $e) {
-            $app['rating_count'] = intval($crawler->filter('.rating .rating-count')->eq(0)->text());
+            try {
+                $app['rating_count'] = intval($crawler->filter('.rating .rating-count')->eq(0)->text());
+            } catch (\Exception $e) {
+                $app['rating_count'] = null;
+            }
         }
 
         $screens = $crawler->filter('[itemprop=screenshot]')->each(function($node) use (&$app) {
