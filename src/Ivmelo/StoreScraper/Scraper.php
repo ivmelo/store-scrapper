@@ -22,7 +22,7 @@ class Scraper
     /**
      * Constructor for the class.
      */
-    function __construct()
+    public function __construct()
     {
         $this->client = new Client();
     }
@@ -38,7 +38,7 @@ class Scraper
 
         $crawler = $this->client->request('GET', 'http://www.apple.com/itunes/charts/free-apps/');
 
-        $top_apps = $crawler->filter('.section-content li')->each(function($node){
+        $top_apps = $crawler->filter('.section-content li')->each(function ($node) {
             $app_data = [];
 
             $app_data['position'] = intval($node->filter('strong')->text());
@@ -64,7 +64,7 @@ class Scraper
 
         $crawler = $this->client->request('GET', 'http://www.apple.com/itunes/charts/paid-apps/');
 
-        $top_apps = $crawler->filter('.section-content li')->each(function($node){
+        $top_apps = $crawler->filter('.section-content li')->each(function ($node) {
             $app_data = [];
 
             $app_data['position'] = intval($node->filter('strong')->text());
@@ -90,7 +90,7 @@ class Scraper
 
         $crawler = $this->client->request('GET', 'https://play.google.com/store/apps/collection/topselling_free?hl=en&num=100&gl=' . $store);
 
-        $top_apps = $crawler->filter('.card.small.square-cover')->each(function($node){
+        $top_apps = $crawler->filter('.card.small.square-cover')->each(function ($node) {
             $app_data = [];
 
             $app_data['position'] = intval($node->filter('.title')->text());
@@ -116,7 +116,7 @@ class Scraper
 
         $crawler = $this->client->request('GET', 'https://play.google.com/store/apps/collection/topselling_paid?hl=en&num=100&gl=' . $store);
 
-        $top_apps = $crawler->filter('.card.small.square-cover')->each(function($node){
+        $top_apps = $crawler->filter('.card.small.square-cover')->each(function ($node) {
             $app_data = [];
 
             $app_data['position'] = intval($node->filter('.title')->text());
@@ -167,7 +167,6 @@ class Scraper
             } catch (\Exception $e) {
                 $app['rating'] = null;
             }
-
         }
 
         // Fallback in case this is the first version of the app...
@@ -181,7 +180,7 @@ class Scraper
             }
         }
 
-        $screens = $crawler->filter('[itemprop=screenshot]')->each(function($node) use (&$app) {
+        $screens = $crawler->filter('[itemprop=screenshot]')->each(function ($node) use (&$app) {
             return$node->attr('src');
         });
 
@@ -221,7 +220,7 @@ class Scraper
         $app['rating'] = doubleval($crawler->filter('[itemprop=ratingValue]')->attr('content'));
         $app['rating_count'] = intval(str_replace(',', '', $crawler->filter('.reviews-num')->text()));
 
-        $screens = $crawler->filter('[itemprop=screenshot]')->each(function($node) use (&$app) {
+        $screens = $crawler->filter('[itemprop=screenshot]')->each(function ($node) use (&$app) {
             return$node->attr('src');
         });
 
